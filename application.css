@@ -6,38 +6,38 @@ body {
 }
 
 h1 {
- color: #ef7591; 
+  color: #ef7591; 
 }
 
 hr {
-    border-top: 5px solid #f8d90f;
-    margin-bottom: 30px;
+  border-top: 5px solid #f8d90f;
+  margin-bottom: 30px;
 }
 
 
 input {
-    border: 5px solid white; 
-    -webkit-box-shadow: 
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1); 
-    -moz-box-shadow: 
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1); 
-    box-shadow: 
-      inset 0 0 8px  rgba(0,0,0,0.1),
-            0 0 16px rgba(0,0,0,0.1); 
-    padding: 15px;
-    background: rgba(255,255,255,0.5);
-    margin: 0 0 10px 0;
-    outline: 0;
+  border: 5px solid white; 
+  -webkit-box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+  0 0 16px rgba(0,0,0,0.1); 
+  -moz-box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+  0 0 16px rgba(0,0,0,0.1); 
+  box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+  0 0 16px rgba(0,0,0,0.1); 
+  padding: 15px;
+  background: rgba(255,255,255,0.5);
+  margin: 0 0 10px 0;
+  outline: 0;
 }
 
 .center-text {
-text-align: center;
+  text-align: center;
 }
 
 .center-block {
-margin: auto;
+  margin: auto;
 }
 
 .footer {
@@ -45,4 +45,11 @@ margin: auto;
   bottom: 0;
 }
 
+.bar {
+  display: inline-block;
+  width: 20px;
+  height: 75px; /* Gets overriden by D3-assigned height below */
+  margin-right: 2px;
+  background-color: #ef7591;
+}
 
