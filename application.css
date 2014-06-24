@@ -46,10 +46,10 @@ input {
 }
 
 .bar {
-  display: inline-block;
-  width: 20px;
-  height: 75px; /* Gets overriden by D3-assigned height below */
-  margin-right: 2px;
-  background-color: #ef7591;
+  fill: #ef7591;
 }
 
+svg {
+  display: block;
+  margin: auto;
+}

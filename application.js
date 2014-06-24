@@ -6,12 +6,8 @@ $(document).ready(function() {
       .done(function(data) {
         window.names = getNames(data);
         getCommits(window.names, username, function(commits) {
-          console.log(commits);
+          drawChart(commits); 
         });
-
-
-        console.log(names)
-
       });
   });
 });
@@ -43,9 +39,53 @@ function getCommits(names, user, callback) {
 }
 
 function drawChart(data) {
-  d3.select(".repos-chart").selectAll("div")
+  var w = 500;
+  var h = 100;
+  var padding = 1;
+
+  var svg = drawSVG(w, h);
+  svg.selectAll("rect")
     .data(data)
     .enter()
-    .append("div")
-    .attr("class", "bar")
+    .append("rect")
+    .classed("bar", true)
+    .attr("x", function(d,i) {
+      return i * (w / data.length) 
+    })
+    .attr("y", function(d){
+      return h - d;
+    })
+    .attr("height", function(d) {
+      return d;
+    })
+    .attr("width", w / data.length - padding);
+
+    drawLabels(w,h,data,svg);
 }
+
+function drawSVG(w, h) {
+  var svg = d3.select("body")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h);
+
+  return svg;
+}
+
+function drawLabels(w,h,data,svg) {
+  svg.selectAll("text") 
+     .data(data)
+     .enter()
+     .append("text")
+     .text(function(d) {
+       return d;
+     })
+    .attr("x", function(d,i) {
+      return i * (w / data.length) + (w / data.length / 2)
+    })
+    .attr("y", function(d){
+      return h - d;
+    })
+    .attr("font-size", "11px")
+}
+
