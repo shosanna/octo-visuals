@@ -1,10 +1,35 @@
-$(document).ready(function() {
+var clientSecret = "?client_id=9906e8b9f73e8788514f&client_secret=06587b6c6ca6e2857635e573a47c35e47838c5bf";
 
+$(document).ready(function() {
   $("input").change(function() {
     var username = $(this).val();
-    var all_repos = $.get("https://api.github.com/users/" + username + "/repos")
+
+    $.get("https://api.github.com/users/" + username + "/repos" + clientSecret)
       .done(function(data) {
         window.names = getNames(data);
+
+        for (var i = 0; i < window.names.length; i++) {
+          var name = names[i];
+          $.get("https://api.github.com/repos/" + username + "/" + name + "/languages" + clientSecret)
+            .done(function(data) {
+              console.log(data);
+
+              var mostFrequentName = null;
+              var mostFrequentCount = 0;
+
+              var allLanguages = {};
+
+              for (language in data) {
+                allLanguages[language] += data[language];
+                console.log(allLanguages);
+                
+                if (data[language] > mostFrequentCount && language != "CSS") { mostFrequentCount = data[language]; mostFrequentName = language }
+              }
+
+              console.log("NEJCASTEJSI JAZYK REPOZITARE " + name + " JE " + mostFrequentName);
+            });
+        }
+
         getCommits(window.names, username, function(commits) {
           drawChart(commits); 
         });
@@ -27,7 +52,7 @@ function getCommits(names, user, callback) {
       acc = []
 
   for (var i = 0; i < names.length; i++) {
-    $.get("https://api.github.com/repos/" + user + "/" + names[i] + "/commits")
+    $.get("https://api.github.com/repos/" + user + "/" + names[i] + "/commits" + clientSecret)
       .done(function(data) {
         acc.push(data.length),
         curr++;
